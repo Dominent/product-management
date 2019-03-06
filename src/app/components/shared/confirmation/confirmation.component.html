@@ -1,0 +1,13 @@
+<ng-container>
+    <div class="confirmation-description">
+        <strong>
+            Do you confirm the requested operation ?
+        </strong>
+    </div>
+    <div>
+        <button type="button" mat-raised-button color="warn" 
+            (click)="confirmationHandler()">Confirm</button>
+        <button type="submit" mat-raised-button class="float-right" color="primary" 
+            (click)="cancelationHandler()">Cancel</button>
+    </div>
+</ng-container>

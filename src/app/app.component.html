@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span>Product Management</span>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-drawer-container class="drawer-container">
+    <mat-drawer mode="side" opened class="drawer-container-nav">
+        <mat-nav-list>
+            <a mat-list-item routerLink="/">Home</a>
+            <a mat-list-item routerLink="/categories">Categories</a>
+            <a mat-list-item routerLink="/products">Products</a>
+        </mat-nav-list>
+    </mat-drawer>
+    <mat-drawer-content class="drawer-container-content">
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+</mat-drawer-container>

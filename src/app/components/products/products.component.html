@@ -1,0 +1,64 @@
+<div fxLayout="column">
+    <div class="product-actions" fxLayout="row-reverse">
+        <button mat-flat-button color="primary" (click)="createProductHandler()">Create</button>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div fxLayout="row">
+        <table mat-table [dataSource]="dataSource" class="product-table">
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>
+                    <strong>Name</strong>
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef>
+                    <strong>Description</strong>
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="category">
+                <th mat-header-cell *matHeaderCellDef>
+                    <strong>Category</strong>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                   <ng-container *ngIf="element.category">
+                       {{element.category.name}}
+                   </ng-container>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="creationDate">
+                <th mat-header-cell *matHeaderCellDef>
+                    <strong>Creation Date</strong>
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.creationDate |  date: 'dd/MM/yyyy'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="edit">
+                <th mat-header-cell *matHeaderCellDef> Edit </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button color="secondary" (click)="editProductHandler(element)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef> Delete </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button color="warn" (click)="deleteHandler(element)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+</div>
