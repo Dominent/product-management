@@ -6,7 +6,12 @@
     }
 
     &-content {
-        padding: 15px;
         margin-left: 15%;
+    }
+}
+
+:host {
+    .mat-nav-list {
+        padding-top: 0px;
     }
 }

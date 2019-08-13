@@ -1,0 +1,26 @@
+<div class="auth-login">
+    <div class="container--fluid">
+        <mat-card>
+            <mat-card-title>
+                <header>Login</header>
+            </mat-card-title>
+            <mat-card-content>
+                <form class="form-container" [formGroup]="formData" (ngSubmit)="submitHandler(formData.value)">
+                    <div class="form-control">
+                        <mat-form-field>
+                            <input matInput placeholder="Username" name="username" type="text" formControlName="username">
+                        </mat-form-field>
+                    </div>
+                    <div class="form-control">
+                        <mat-form-field>
+                            <input matInput placeholder="Password" name="password" type="password" formControlName="password">
+                        </mat-form-field>
+                    </div>
+                    <div class="form-control">
+                        <button type="submit" mat-raised-button color="primary">Login</button>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

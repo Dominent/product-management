@@ -1,42 +1,34 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MaterialModule } from './material.module';
+import { MaterialModule } from '../../@material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
-import { categoryReducer } from './store/reducers/category.reducer';
-import { productReducer } from './store/reducers/product.reducer';
-import { CategoriesComponent } from './components/categories/categories.component';
-import { ProductsComponent } from './components/products/products.component';
-import { AddCategoryDialogComponent } from './components/categories/add-category/add-category.component';
-import { AddProductDialogComponent } from './components/products/add-product/add-product.component';
-import { EditCategoryDialogComponent } from './components/categories/edit-category/edit-category.component';
-import { EditProductDialogComponent } from './components/products/edit-product/edit-product.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmationDialogComponent } from './components/shared/confirmation/confirmation.component';
 import { MAT_DATE_LOCALE } from '@angular/material';
+import { ProjectsComponent } from './pages/projects/projects.component';
+import { AuthService } from './components/auth/auth.service';
+import { AuthGuardService } from './components/auth/auth-guard.service';
+import { HomeComponent } from './pages/home/home.component';
+import { AuthLoginComponent } from './pages/login/auth-login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CategoriesComponent,
-    ProductsComponent,
+    AuthLoginComponent,
+    HomeComponent,
 
-    AddCategoryDialogComponent,
-    EditCategoryDialogComponent,
-    AddProductDialogComponent,
-    EditProductDialogComponent,
     ConfirmationDialogComponent
   ],
   imports: [
     MaterialModule,
     FlexLayoutModule,
     StoreModule.forRoot({
-      categories: categoryReducer,
-      products: productReducer
+      // Register reducers here
     }),
     BrowserModule,
     FormsModule,
@@ -45,14 +37,16 @@ import { MAT_DATE_LOCALE } from '@angular/material';
     BrowserAnimationsModule
   ],
   entryComponents: [
-    AddCategoryDialogComponent,
-    EditCategoryDialogComponent,
-    AddProductDialogComponent,
-    EditProductDialogComponent,
     ConfirmationDialogComponent
   ],
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'} /* dd/MM/yyyy format for datepicker */
+    { 
+      provide: MAT_DATE_LOCALE,
+      useValue: 'en-GB'
+    }, /* dd/MM/yyyy format for datepicker */
+
+    AuthService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })

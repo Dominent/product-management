@@ -1,18 +1,71 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <span>Product Management</span>
-    </mat-toolbar-row>
-</mat-toolbar>
+<ng-container *ngIf="authService.IsAuthenticated(); else notAuthenticated">
+    <mat-toolbar color="primary">
+        <mat-toolbar-row>
+            <div class="container container--fluid">
+                <div class="row">
+                    <div class="col-md-2">
+                        <span>Portfolio Management</span>
+                    </div>
+                    <div class="offset-md-9 col-md-1">
+                        <button mat-icon-button [matMenuTriggerFor]="auth">
+                            <mat-icon>person_outline</mat-icon>
+                        </button>
+                        <mat-menu #auth="matMenu">
+                            <div mat-menu-item>
+                                <mat-icon>category</mat-icon>
+                                <span>Username</span>
+                            </div>
+                            <button mat-menu-item (click)="logout()">
+                                <mat-icon>exit_to_app</mat-icon>
+                                <span>Logout</span>
+                            </button>
+                        </mat-menu>
+                    </div>
+                </div>
+            </div>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    
+    <mat-drawer-container class="drawer-container">
+        <mat-drawer mode="side" opened class="drawer-container-nav">
+            <mat-nav-list>
+                <mat-list-item routerLink="/categories">
+                    <mat-icon>view_module</mat-icon>
+                    <span>Categories</span>
+                </mat-list-item>
+                <mat-list-item routerLink="/products">
+                    <mat-icon>notification_important</mat-icon>
+                    <span>Products</span>
+                </mat-list-item>
+            </mat-nav-list>
+            <mat-expansion-panel [class.mat-elevation-z0]="true">
+                <mat-expansion-panel-header>
+                    <span>Projects</span>
+                </mat-expansion-panel-header>
+                <mat-nav-list>
+                    <a mat-list-item routerLink="/projects">
+                        <mat-icon>work_outline</mat-icon>
+                        <span>All</span>
+                    </a>
+                    <a mat-list-item routerLink="/projects/details">
+                        <mat-icon>attach_money</mat-icon>
+                        <span>Details</span>
+                    </a>
+                    <a mat-list-item routerLink="/projects/images">
+                        <mat-icon>image</mat-icon>
+                        <span>Images</span>
+                    </a>
+                </mat-nav-list>
+            </mat-expansion-panel>
+        </mat-drawer>
+        <mat-drawer-content class="drawer-container-content">
+            <mat-progress-bar></mat-progress-bar>
+            <router-outlet></router-outlet>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</ng-container>
 
-<mat-drawer-container class="drawer-container">
-    <mat-drawer mode="side" opened class="drawer-container-nav">
-        <mat-nav-list>
-            <a mat-list-item routerLink="/">Home</a>
-            <a mat-list-item routerLink="/categories">Categories</a>
-            <a mat-list-item routerLink="/products">Products</a>
-        </mat-nav-list>
-    </mat-drawer>
-    <mat-drawer-content class="drawer-container-content">
-        <router-outlet></router-outlet>
-    </mat-drawer-content>
-</mat-drawer-container>
+<ng-template #notAuthenticated>
+    <mat-progress-bar></mat-progress-bar>
+    <router-outlet></router-outlet>
+</ng-template>

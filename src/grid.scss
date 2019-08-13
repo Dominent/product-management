@@ -1,0 +1,68 @@
+/* breakpoints */
+$grid-bp-xs: 0;
+$grid-bp-sm: 576;
+$grid-bp-md: 768;
+$grid-bp-lg: 992;
+$grid-bp-xl: 1200;
+
+/* columns */
+$grid-cols: 12;
+
+/* modifier to breakpont */
+$modifier-to-breakpoint: (
+    'xs': $grid-bp-xs,
+    'sm': $grid-bp-sm,
+    'md': $grid-bp-md,
+    'lg': $grid-bp-lg,
+    'xl': $grid-bp-xl
+); 
+
+/* mixins */
+@mixin create-media-query($breakpoint) {
+    @if($breakpoint == 0) {
+        @content;
+    } @else {
+        @media screen and (min-width: $breakpoint * 1px) {
+            @content;
+        }
+    }
+}
+
+@mixin create-column-classes($modifier, $grid-cols, $breakpoint) {
+    @include create-media-query($breakpoint) {
+      @for $i from 1 through $grid-cols {
+        .col-#{$modifier}-#{$i} {
+          flex-basis: (100 / ($grid-cols / $i) ) * 1%;
+        }
+        .offset-#{$modifier}-#{$i} {
+          margin-left: (100 / ($grid-cols / $i) ) * 1%;
+        }
+      }
+    }
+}
+
+/* styles */
+.container {
+    max-width: $grid-bp-md * 1px;
+    margin: 0 auto;
+
+    &--fluid {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+
+      &--reverse {
+        flex-direction: row-reverse;
+      }
+
+    @each $modifier, $breakpoint in $modifier-to-breakpoint {
+      @include create-column-classes($modifier, $grid-cols, $breakpoint);
+    }
+  }
+}
