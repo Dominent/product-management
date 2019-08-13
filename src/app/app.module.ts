@@ -15,6 +15,7 @@ import { AuthService } from './components/auth/auth.service';
 import { AuthGuardService } from './components/auth/auth-guard.service';
 import { HomeComponent } from './pages/home/home.component';
 import { AuthLoginComponent } from './pages/login/auth-login.component';
+import { ProjectAddDialogComponent } from './components/project/project-add/project-add.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,9 @@ import { AuthLoginComponent } from './pages/login/auth-login.component';
     AuthLoginComponent,
     HomeComponent,
     ProjectsComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+
+    ProjectAddDialogComponent
   ],
   imports: [
     MaterialModule,
@@ -37,7 +40,9 @@ import { AuthLoginComponent } from './pages/login/auth-login.component';
     BrowserAnimationsModule
   ],
   entryComponents: [
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    
+    ProjectAddDialogComponent
   ],
   providers: [
     { 
