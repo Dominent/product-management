@@ -21,7 +21,7 @@ import { AuthLoginComponent } from './pages/login/auth-login.component';
     AppComponent,
     AuthLoginComponent,
     HomeComponent,
-
+    ProjectsComponent,
     ConfirmationDialogComponent
   ],
   imports: [
