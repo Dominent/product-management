@@ -41,17 +41,19 @@ $modifier-to-breakpoint: (
     }
 }
 
-/* styles */
 .container {
-    max-width: $grid-bp-md * 1px;
-    margin: 0 auto;
+  max-width: $grid-bp-md * 1px;
+  margin: 0 auto;
 
-    &--fluid {
-      width: 100%;
-      max-width: 100%;
-      margin: 0;
-    }
+  &--fluid {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+}
 
+.container,
+.container--fluid {
     .row {
       display: flex;
       flex-wrap: wrap;

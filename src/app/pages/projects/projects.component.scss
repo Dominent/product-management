@@ -1,8 +1,11 @@
 .project-table {
     width: 100%;
-    margin-top: 15px;
 }
 
-.project-actions {
-    margin-bottom: 15px
+.row-actions {
+    margin: 10px 0;
+}
+
+.mat-row:hover {
+    background: rgba(0,0,0,.04);
 }

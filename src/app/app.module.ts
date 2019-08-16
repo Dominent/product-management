@@ -16,22 +16,24 @@ import { AuthGuardService } from './components/auth/auth-guard.service';
 import { HomeComponent } from './pages/home/home.component';
 import { AuthLoginComponent } from './pages/login/auth-login.component';
 import { ProjectAddDialogComponent } from './components/project/project-add/project-add.component';
+import { projectReducer } from 'src/app/store/reducers/project.reducer';
+import { ProjectDetailsComponent } from './pages/projects/project-details/project-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthLoginComponent,
     HomeComponent,
-    ProjectsComponent,
     ConfirmationDialogComponent,
-
+    ProjectsComponent,
+    ProjectDetailsComponent,
     ProjectAddDialogComponent
   ],
   imports: [
     MaterialModule,
     FlexLayoutModule,
     StoreModule.forRoot({
-      // Register reducers here
+      project: projectReducer
     }),
     BrowserModule,
     FormsModule,

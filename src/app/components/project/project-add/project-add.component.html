@@ -16,18 +16,26 @@
 
         <div class="form-control">
             <mat-form-field>
-                <input matInput [matDatepicker]="pickerStartDate" placeholder="Start Date" name="startDate" formControlName="startDate">
+                <input matInput [matDatepicker]="pickerStartDate" placeholder="Start Date" name="startDate"
+                    formControlName="startDate">
                 <mat-datepicker-toggle matSuffix [for]="pickerStartDate"></mat-datepicker-toggle>
                 <mat-datepicker #pickerStartDate></mat-datepicker>
-              </mat-form-field>
+            </mat-form-field>
         </div>
 
         <div class="form-control">
             <mat-form-field>
-                <input matInput [matDatepicker]="pickerEndDate" placeholder="End Date" name="endDate" formControlName="endDate">
+                <input matInput [matDatepicker]="pickerEndDate" placeholder="End Date" name="endDate"
+                    formControlName="endDate">
                 <mat-datepicker-toggle matSuffix [for]="pickerEndDate"></mat-datepicker-toggle>
                 <mat-datepicker #pickerEndDate></mat-datepicker>
-              </mat-form-field>
+            </mat-form-field>
+        </div>
+
+        <div class="form-control">
+            <div class="form-field">
+                <mat-checkbox name="ongoing" formControlName="ongoing">Ongoing</mat-checkbox>
+            </div>
         </div>
 
         <div class="form-control">

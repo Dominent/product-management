@@ -14,7 +14,8 @@ import {
     MatMenuModule,
     MatExpansionModule,
     MatProgressBarModule,
-    MatCardModule
+    MatCardModule,
+    MatCheckboxModule
 } from '@angular/material';
 
 @NgModule({
@@ -33,7 +34,8 @@ import {
         MatMenuModule,
         MatExpansionModule,
         MatProgressBarModule,
-        MatCardModule
+        MatCardModule,
+        MatCheckboxModule
     ]
 })
 export class MaterialModule {}
