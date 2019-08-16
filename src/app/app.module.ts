@@ -18,6 +18,7 @@ import { AuthLoginComponent } from './pages/login/auth-login.component';
 import { ProjectAddDialogComponent } from './components/project/project-add/project-add.component';
 import { projectReducer } from 'src/app/store/reducers/project.reducer';
 import { ProjectDetailsComponent } from './pages/projects/project-details/project-details.component';
+import { authReducer } from 'src/app/store/reducers/auth.reducer';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ProjectDetailsComponent } from './pages/projects/project-details/projec
     MaterialModule,
     FlexLayoutModule,
     StoreModule.forRoot({
-      project: projectReducer
+      project: projectReducer,
+      auth: authReducer
     }),
     BrowserModule,
     FormsModule,

@@ -1,4 +1,4 @@
-<ng-container *ngIf="authService.IsAuthenticated(); else notAuthenticated">
+<ng-container *ngIf="authenticated | async; else notAuthenticated">
     <mat-toolbar color="primary">
         <mat-toolbar-row>
             <div class="container container--fluid">
@@ -12,7 +12,8 @@
                         </button>
                         <mat-menu #auth="matMenu">
                             <div mat-menu-item>
-                                <span>Username</span>
+                                <span>Hello&nbsp;</span>
+                                <span>{{username | async}}</span>
                             </div>
                             <button mat-menu-item (click)="logout()">
                                 <span>Logout</span>

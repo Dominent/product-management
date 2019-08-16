@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
+import { Login } from 'src/app/models/login.model';
+import { AppState } from 'src/app/store/app.state';
+import { Store } from '@ngrx/store';
+import { LoginUserAction, LogoutUserAction } from 'src/app/store/actions/auth.actions';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthService {
-    private isAuthenticated = false;
+    constructor(
+        private store: Store<AppState>
+    ) {}
 
-    public Login(): void {
-        this.isAuthenticated = true;
+    public Login(login: Login): void {
+        this.store.dispatch(new LoginUserAction(login))
     }
-
-    public IsAuthenticated (): boolean {
-        return this.isAuthenticated;
-    }
-
     public Logout(): void {
-        this.isAuthenticated = false;
+        this.store.dispatch(new LogoutUserAction())
     }
 }
