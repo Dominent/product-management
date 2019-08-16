@@ -1,0 +1,99 @@
+<ng-container>
+    <h3>Add Project Details</h3>
+    <mat-divider></mat-divider>
+    <div class="form-container">
+        <mat-horizontal-stepper linear #stepper>
+            <mat-step>
+                <ng-template matStepLabel>General Information</ng-template>
+                <div class="form-control">
+                    <mat-form-field>
+                        <input matInput placeholder="Info" name="info" [(ngModel)]="info">
+                    </mat-form-field>
+                </div>
+                <div class="form-control">
+                    <mat-form-field>
+                        <textarea matInput placeholder="Description" name="description" [(ngModel)]="description">
+                        </textarea>
+                    </mat-form-field>
+                </div>
+                <div class="form-control">
+                    <button class="float-right" mat-raised-button color="primary" matStepperNext>Next</button>
+                </div>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Images</ng-template>
+                <div class="form-control">
+                    <fh-upload (Change)="onProjectImageAdd($event)" Limit="10" Name="upload"
+                        Label="Project Details Images">
+                    </fh-upload>
+                </div>
+                <div class="form-control">
+                    <button class="float-right" mat-raised-button color="primary" matStepperNext>Next</button>
+                    <button mat-raised-button color="warn" matStepperPrevious>Previous</button>
+                </div>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Links</ng-template>
+                <div class="container--fluid" *ngFor="let projectLink of projectLinks; let i = index">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-control">
+                                <mat-form-field>
+                                    <input matInput placeholder="Name" [(ngModel)]="projectLink.name"
+                                        [name]="'name-' + i">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="offset-md-1 col-md-6">
+                            <div class="form-control">
+                                <mat-form-field>
+                                    <input matInput placeholder="Href" [(ngModel)]="projectLink.href"
+                                        [name]="'href-' + i">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-control">
+                    <fh-button Icon="add" Text="Add" Color="basic" (Click)="onProjectLinkAdded()"></fh-button>
+                </div>
+                <div class="form-control">
+                    <button class="float-right" mat-raised-button color="primary" matStepperNext>Next</button>
+                    <button mat-raised-button color="warn" matStepperPrevious>Previous</button>
+                </div>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Tags</ng-template>
+                <div class="container--fluid" *ngFor="let projectTag of projectTags; let i = index">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-control">
+                                <mat-form-field>
+                                    <input matInput placeholder="Name" [(ngModel)]="projectTag.name"
+                                        [name]="'name-' + i">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-control">
+                    <fh-button Icon="add" Text="Add" Color="basic" (Click)="onProjectTagAdded()"></fh-button>
+                </div>
+                <div class="form-control">
+                    <button class="float-right" mat-raised-button color="primary" matStepperNext>Next</button>
+                    <button mat-raised-button color="warn" matStepperPrevious>Previous</button>
+                </div>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Done</ng-template>
+                <div>
+                    <button class="float-right ml-1" mat-raised-button color="primary" matStepperNext
+                        (click)="submitHandler()">Finish</button>
+                    <button class="float-right" mat-raised-button color="accent"
+                        (click)="stepper.reset()">Reset</button>
+                    <button mat-raised-button color="warn" matStepperPrevious>Previous</button>
+                </div>
+            </mat-step>
+        </mat-horizontal-stepper>
+    </div>
+</ng-container>

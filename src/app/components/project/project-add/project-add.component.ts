@@ -28,7 +28,7 @@ export class ProjectAddDialogComponent {
     }
 
     submitHandler(project: Project) {
-        this.store.dispatch(new CreateProjectAction(Object.assign(project)));
+        this.store.dispatch(new CreateProjectAction(project));
         this.dialogRef.close();
     }
 

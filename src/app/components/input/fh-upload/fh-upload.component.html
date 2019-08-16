@@ -1,0 +1,19 @@
+<div class="fh-upload">
+    <div class="fh-upload__input__wrapper">
+        <label [for]="Name" class="fh-upload__input__label">{{Label}}</label>
+        <fh-button Icon="add" Text="Add" Color="primary" (Click)="input.click()"></fh-button>
+        <input #input [name]="Name" [id]="Name" type="file" (change)="onFileChange($event)" style="display:none;">
+    </div>
+    <div class="fh-upload__uploads__wrapper" *ngIf="uploads.length > 0">
+        <ul class="fh-upload__list">
+            <li *ngFor="let upload of uploads" class="fh-upload__list__item">
+                <div class="fh-upload__list__item__title__wrapper">
+                    <span class="fh-upload__list__item__title">{{upload.name}}</span>
+                </div>
+                <div class="fh-upload__list__item__image__wrapper">
+                    <img class="fh-upload__list__item__image" [src]="upload.value" />
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

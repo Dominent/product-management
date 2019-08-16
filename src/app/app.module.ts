@@ -19,6 +19,9 @@ import { ProjectAddDialogComponent } from './components/project/project-add/proj
 import { projectReducer } from 'src/app/store/reducers/project.reducer';
 import { ProjectDetailsComponent } from './pages/projects/project-details/project-details.component';
 import { authReducer } from 'src/app/store/reducers/auth.reducer';
+import { ProjectDetailsAddDialogComponent } from './components/project/project-details/project-details-add/project-details-add.component';
+import { FhUploadComponent } from './components/input/fh-upload/fh-upload.component';
+import { FhButtonComponent } from './components/input/fh-button/fh-button.component';
 
 @NgModule({
   declarations: [
@@ -26,9 +29,14 @@ import { authReducer } from 'src/app/store/reducers/auth.reducer';
     AuthLoginComponent,
     HomeComponent,
     ConfirmationDialogComponent,
+
+    FhUploadComponent,
+    FhButtonComponent,
+
     ProjectsComponent,
     ProjectDetailsComponent,
-    ProjectAddDialogComponent
+    ProjectAddDialogComponent,
+    ProjectDetailsAddDialogComponent
   ],
   imports: [
     MaterialModule,
@@ -45,8 +53,8 @@ import { authReducer } from 'src/app/store/reducers/auth.reducer';
   ],
   entryComponents: [
     ConfirmationDialogComponent,
-    
-    ProjectAddDialogComponent
+    ProjectAddDialogComponent,
+    ProjectDetailsAddDialogComponent
   ],
   providers: [
     { 
