@@ -1,4 +1,4 @@
-export interface ProjectLink {
+export interface LinkInput {
     name: string;
     href: string;
 }

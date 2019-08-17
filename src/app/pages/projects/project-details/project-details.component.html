@@ -4,15 +4,101 @@
         <div class="col-md-8">
         </div>
         <div class="col-md-4">
-            <button mat-flat-button color="primary" (click)="createProjectDetails()">
-                Create
-            </button>
+            <ng-container>
+                <button mat-flat-button color="primary" [disabled]="projectDetail | async" (click)="createProjectDetails()">
+                    Create
+                </button>
+            </ng-container>
         </div>
     </div>
-    <mat-divider></mat-divider>
-    <div class="row">
-        <div class="col-md-12">
-            <!-- To Here -->
+    <mat-divider></mat-divider><!-- To Here -->
+    <ng-container *ngIf="projectDetail | async">
+        <div class="row mt-2">
+            <div class="offset-md-1 col-md-4">
+                <mat-card>
+                    <mat-card-title>
+                        <span>General Information</span>
+                    </mat-card-title>
+                    <mat-card-content>
+                        <div>
+                            <strong>Id:&nbsp;</strong>
+                            <span>{{(projectDetail | async).id}}</span>
+                        </div>
+                        <div>
+                            <strong>Project Id:&nbsp;</strong>
+                            <span>{{(projectDetail | async).projectId}}</span>
+                        </div>
+                        <div>
+                            <strong>Info:&nbsp;</strong>
+                            <span>{{(projectDetail | async).info}}</span>
+                        </div>
+                        <mat-divider class="my-2" style="position: inherit"></mat-divider>
+                        <div>
+                            <strong>Description:&nbsp;</strong>
+                            <span>{{(projectDetail | async).description}}</span>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="offset-md-1 col-md-4">
+                <mat-card>
+                    <mat-card-title>
+                        <span>Tags</span>
+                    </mat-card-title>
+                    <mat-card-content>
+                        <mat-chip-list>
+                            <mat-chip *ngFor="let tag of (projectDetail | async).tags">{{tag.name}}</mat-chip>
+                        </mat-chip-list>
+                    </mat-card-content>
+                </mat-card>
+            </div>
         </div>
-    </div>
+        <div class="row mt-2">
+            <div class="offset-md-3 col-md-6">
+                <mat-card>
+                    <mat-card-title>
+                        <span>Links</span>
+                    </mat-card-title>
+                    <mat-card-content>
+                        <table mat-table [dataSource]="(projectDetail | async).links" class="project-table">
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)">
+                            </tr>
+
+                            <ng-container matColumnDef="id">
+                                <th mat-header-cell *matHeaderCellDef> Id. </th>
+                                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="name">
+                                <th mat-header-cell *matHeaderCellDef> Name. </th>
+                                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="href">
+                                <th mat-header-cell *matHeaderCellDef> Href. </th>
+                                <td mat-cell *matCellDef="let element"> {{element.href}} </td>
+                            </ng-container>
+                        </table>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="offset-md-1 col-md-10">
+                <mat-card>
+                    <mat-card-title>
+                        <span>Images</span>
+                    </mat-card-title>
+                    <mat-card-content>
+                        <mat-grid-list cols="3" rowHeight="300px">
+                            <mat-grid-tile *ngFor="let image of projectImages | async" [colspan]="1" [rowspan]="1">
+                                <img [src]="image.path" [alt]="image.alt" class="full-width-height-image">
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </ng-container>
 </div>

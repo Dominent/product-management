@@ -7,12 +7,12 @@
                 <ng-template matStepLabel>General Information</ng-template>
                 <div class="form-control">
                     <mat-form-field>
-                        <input matInput placeholder="Info" name="info" [(ngModel)]="info">
+                        <input matInput placeholder="Info" name="info" [(ngModel)]="projectDetail.info">
                     </mat-form-field>
                 </div>
                 <div class="form-control">
                     <mat-form-field>
-                        <textarea matInput placeholder="Description" name="description" [(ngModel)]="description">
+                        <textarea matInput placeholder="Description" name="description" [(ngModel)]="projectDetail.description">
                         </textarea>
                     </mat-form-field>
                 </div>
@@ -34,7 +34,7 @@
             </mat-step>
             <mat-step>
                 <ng-template matStepLabel>Links</ng-template>
-                <div class="container--fluid" *ngFor="let projectLink of projectLinks; let i = index">
+                <div class="container--fluid" *ngFor="let projectLink of projectDetail.links; let i = index">
                     <div class="row">
                         <div class="col-md-5">
                             <div class="form-control">
@@ -64,7 +64,7 @@
             </mat-step>
             <mat-step>
                 <ng-template matStepLabel>Tags</ng-template>
-                <div class="container--fluid" *ngFor="let projectTag of projectTags; let i = index">
+                <div class="container--fluid" *ngFor="let projectTag of projectDetail.tags; let i = index">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-control">

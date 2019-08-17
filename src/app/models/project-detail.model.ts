@@ -1,12 +1,13 @@
-import { ProjectImage } from './project-image.model';
-import { ProjectLink } from './project-link.model';
-import { ProjectTag } from './project-tag.model';
+import { Link } from './link.model';
+import { Image } from './image.model';
+import { Tag } from './tag.model';
 
 export interface ProjectDetail {
     id: number;
+    projectId: number;
     info: string;
     description: string;
-    projectDetailImages: ProjectImage[];
-    projectDetailLinks: ProjectLink[];
-    projectDetailTags: ProjectTag[];
+    images: Image[];
+    links: Link[];
+    tags: Tag[];
 }
