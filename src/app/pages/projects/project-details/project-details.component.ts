@@ -17,7 +17,7 @@ import { Image } from 'src/app/models/image.model';
 export class ProjectDetailsComponent {
     private projectId: number;
 
-    public displayedColumns: string[] = ['id', 'name', 'href']
+    public displayedColumns: string[] = ['id', 'name', 'href', 'edit', 'delete']
 
     constructor(
         private dialog: MatDialog,
@@ -52,5 +52,29 @@ export class ProjectDetailsComponent {
         return this.projectDetail.pipe(
             map(x => x.images)
         )
+    }
+
+    public deleteLinkHandler(link: Link) {
+
+    }
+
+    public editLinkHandler(link: Link) {
+
+    }
+
+    public editGeneralInfoHandler() {
+
+    }
+
+    public addTagHandler() {
+
+    }
+
+    public addLinkHandler() {
+
+    }
+
+    public addImageHandler() {
+        
     }
 }
