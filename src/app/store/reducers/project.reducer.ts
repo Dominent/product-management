@@ -1,5 +1,7 @@
 import { ProjectState } from "src/app/store/state/project.state";
 import { ProjectActions, ProjectActionTypes } from 'src/app/store/actions/project.actions';
+import { Image } from 'src/app/models/image.model';
+import { Link } from 'src/app/models/link.model';
 
 const initialState: ProjectState = {
     projects: [
@@ -15,6 +17,16 @@ export function projectReducer(state = initialState, action: ProjectActions): Pr
     switch (action.type) {
         case ProjectActionTypes.CREATE_PROJECT:
             return { ...state, projects: [...state.projects, action.payload] }
+        case ProjectActionTypes.CREATE_PROJECT_DETAIL:
+            return { ...state, projectDetails: [...state.projectDetails, {
+                id: null,
+                projectId: action.payload.projectId,
+                info: action.payload.projectDetail.info,
+                description: action.payload.projectDetail.description,
+                images: [],
+                links: [],
+                tags: []
+            }]}
         default:
             return state;
     }
