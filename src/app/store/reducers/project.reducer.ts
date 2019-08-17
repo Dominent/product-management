@@ -1,7 +1,5 @@
 import { ProjectState } from "src/app/store/state/project.state";
 import { ProjectActions, ProjectActionTypes } from 'src/app/store/actions/project.actions';
-import { Image } from 'src/app/models/image.model';
-import { Link } from 'src/app/models/link.model';
 
 const initialState: ProjectState = {
     projects: [
