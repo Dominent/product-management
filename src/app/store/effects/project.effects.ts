@@ -1,23 +1,12 @@
 import { Injectable } from "@angular/core";
 import { Effect, Actions, ofType } from '@ngrx/effects';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Action, Store } from '@ngrx/store';
-import {
-    ProjectActionTypes,
-    CreateProjectAction,
-    CreateProjectSuccessAction,
-    CreateProjectFailureAction,
-    CreateProjectDetailsSuccessAction,
-    CreateProjectDetailsAction,
-    CreateProjectDetailsFailureAction,
-    FetchProjectsAction,
-    FetchProjectsSuccessAction,
-    FetchProjectsFailureAction
-} from '../actions/project.actions';
 import { switchMap, map, catchError } from 'rxjs/operators';
 import { ProjectService } from 'src/app/services/project.service';
 import { AlertService, AlertContext, AlertType } from 'src/app/services/alert.service';
 import { AppState } from '../app.state';
+import { createProjectAction, createProjectSuccessAction, createProjectFailureAction, fetchProjectsAction, fetchProjectsSuccessAction, fetchProjectsFailureAction, createProjectDetailsAction, createProjectDetailsSuccessAction, createProjectDetailsFailureAction } from '../actions/project.actions';
 
 @Injectable()
 export class ProjectEffects {
@@ -30,35 +19,35 @@ export class ProjectEffects {
 
     @Effect()
     createProjectEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<CreateProjectAction>(ProjectActionTypes.CREATE_PROJECT),
-        switchMap((action) => this.projectService.createProject(action.payload)),
-        map((res) => new CreateProjectSuccessAction(res)),
+        ofType<ReturnType<typeof createProjectAction>>(createProjectAction.type),
+        switchMap((props) => this.projectService.createProject(props)),
+        map((res) => createProjectSuccessAction({payload: res})),
         catchError((err, caught) => {
-            this.store.dispatch(new CreateProjectFailureAction(err));
+            this.store.dispatch(createProjectFailureAction(err));
             return caught;
         })
     )
 
     @Effect()
     getProjectsEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<FetchProjectsAction>(ProjectActionTypes.FETCH_PROJECTS),
-        switchMap((action) => this.projectService.getProjects()),
-        map((res) => new FetchProjectsSuccessAction(res)),
+        ofType<ReturnType<typeof fetchProjectsAction>>(fetchProjectsAction.type),
+        switchMap((props) => this.projectService.getProjects()),
+        map((res) => fetchProjectsSuccessAction({ payload: res })),
         catchError((err, caught) => {
-            this.store.dispatch(new FetchProjectsFailureAction(err));
+            this.store.dispatch(fetchProjectsFailureAction(err));
             return caught;
         })
     )
 
     @Effect()
     createProjectDetailsEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<CreateProjectDetailsAction>(ProjectActionTypes.CREATE_PROJECT_DETAILS),
-        switchMap((action) => this.projectService.createProjectDetails(
-            action.payload.projectId,
-            action.payload.projectDetail)),
-        map((res) => new CreateProjectDetailsSuccessAction(res)),
+        ofType<ReturnType<typeof createProjectDetailsAction>>(createProjectDetailsAction.type),
+        switchMap((props) => this.projectService.createProjectDetails(
+            props.projectId,
+            props.projectDetail)),
+        map((res) => createProjectDetailsSuccessAction({payload: res})),
         catchError((err, caught) => {
-            this.store.dispatch(new CreateProjectDetailsFailureAction(err));
+            this.store.dispatch(createProjectDetailsFailureAction(err));
             return caught;
         })
     )
@@ -66,8 +55,8 @@ export class ProjectEffects {
     @Effect({ dispatch: false })
     createProjectDetailsEffectSuccess$ = this.actions$.pipe(
         ofType(
-            ProjectActionTypes.CREATE_PROJECT_DETAILS_SUCCESS,
-            ProjectActionTypes.CREATE_PROJECT_SUCCESS
+            createProjectDetailsSuccessAction.type,
+            createProjectSuccessAction.type
         ),
         map((action) => this.alertService.show(new AlertContext(AlertType.Success,
             `Successfully created/edited/deleted: ${JSON.stringify(action)}`)))
@@ -76,8 +65,8 @@ export class ProjectEffects {
     @Effect({ dispatch: false })
     createProjectDetailsEffectFailure$ = this.actions$.pipe(
         ofType(
-            ProjectActionTypes.CREATE_PROJECT_DETAILS_FAILURE,
-            ProjectActionTypes.CREATE_PROJECT_FAILURE
+            createProjectDetailsFailureAction.type,
+            createProjectFailureAction.type
         ),
         map((action) => this.alertService.show(new AlertContext(AlertType.Failure,
             `Failed to create/edit/delete: ${JSON.stringify(action)}`)))

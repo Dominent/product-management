@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { Login } from 'src/app/models/login.model';
 import { AppState } from 'src/app/store/app.state';
 import { Store } from '@ngrx/store';
-import { LoginUserAction, LogoutUserAction } from 'src/app/store/actions/auth.actions';
-import { Observable } from 'rxjs';
+import { loginUserAction, logoutUserAction } from 'src/app/store/actions/auth.actions';
 
 @Injectable()
 export class AuthService {
@@ -12,9 +11,9 @@ export class AuthService {
     ) {}
 
     public Login(login: Login): void {
-        this.store.dispatch(new LoginUserAction(login))
+        this.store.dispatch(loginUserAction(login))
     }
     public Logout(): void {
-        this.store.dispatch(new LogoutUserAction())
+        this.store.dispatch(logoutUserAction())
     }
 }

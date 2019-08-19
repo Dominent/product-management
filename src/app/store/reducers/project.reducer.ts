@@ -1,21 +1,21 @@
-import { ProjectActions, ProjectActionTypes } from 'src/app/store/actions/project.actions';
 import { initialState, ProjectState } from '../state/project.state';
+import { createProjectSuccessAction, fetchProjectsSuccessAction, createProjectDetailsSuccessAction } from '../actions/project.actions';
 
-export function projectReducer(state = initialState, action: ProjectActions): ProjectState {
+export function projectReducer(state = initialState, action): ProjectState {
     switch (action.type) {
-        case ProjectActionTypes.CREATE_PROJECT_SUCCESS: {
+        case createProjectSuccessAction.type: {
             return {
                 ...state,
                 projects: [...state.projects, action.payload]
             }
         }
-        case ProjectActionTypes.CREATE_PROJECT_DETAILS_SUCCESS: {
+        case createProjectDetailsSuccessAction.type: {
             return {
                 ...state,
                 projectDetails: [...state.projectDetails, action.payload]
             }
         }
-        case ProjectActionTypes.FETCH_PROJECTS_SUCCESS: {
+        case fetchProjectsSuccessAction.type: {
             return {
                 ...state,
                 projects: action.payload

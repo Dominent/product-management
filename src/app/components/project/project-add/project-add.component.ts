@@ -1,11 +1,10 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Project } from 'src/app/models/project.model';
 import { AppState } from 'src/app/store/app.state';
 import { Store } from '@ngrx/store';
-import { CreateProjectAction } from 'src/app/store/actions/project.actions';
 import { ProjectInput } from 'src/app/models/input/project-input.model';
+import { createProjectAction } from 'src/app/store/actions/project.actions';
 
 @Component({
     templateUrl: 'project-add.component.html',
@@ -34,8 +33,7 @@ export class ProjectAddDialogComponent {
     }
 
     submitHandler(project: ProjectInput) {
-        this.store.dispatch(new CreateProjectAction(
-            Object.assign(project, { image: this.image.value })));
+        this.store.dispatch(createProjectAction(Object.assign(project, { image: this.image.value })));
         this.dialogRef.close();
     }
 

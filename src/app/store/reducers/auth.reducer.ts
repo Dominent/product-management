@@ -1,16 +1,16 @@
-import { AuthActions, AuthActionTypes } from '../actions/auth.actions';
+import { loginUserAction, logoutUserAction } from '../actions/auth.actions';
 import { initialState, AuthState } from '../state/auth.state';
 
-export function authReducer(state = initialState, action: AuthActions): AuthState {
+export function authReducer(state = initialState, action): AuthState {
     switch (action.type) {
-        case AuthActionTypes.LOGIN_USER: {
+        case loginUserAction.type: {
             return {
                 ...state,
                 authenticated: true,
-                user: { username: action.payload.username }
+                user: { username: action.username }
             };
         }
-        case AuthActionTypes.LOGOUT_USER: {
+        case logoutUserAction.type: {
             return {
                 ...state,
                 authenticated: false,

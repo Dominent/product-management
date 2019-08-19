@@ -6,7 +6,7 @@ import { AppState } from 'src/app/store/app.state';
 import { Store, select } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { selectProjects } from 'src/app/store/selectors/project.selector';
-import { FetchProjectsAction } from 'src/app/store/actions/project.actions';
+import { fetchProjectsAction } from 'src/app/store/actions/project.actions';
 
 @Component({
     templateUrl: './projects.component.html',
@@ -18,7 +18,7 @@ export class ProjectsComponent {
         private store: Store<AppState>,
         private router: Router
     ) { 
-        this.store.dispatch(new FetchProjectsAction());
+        this.store.dispatch(fetchProjectsAction());
     }
 
     projects$ = this.store.pipe(select(selectProjects));

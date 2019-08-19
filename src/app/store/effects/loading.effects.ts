@@ -3,8 +3,21 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { EnableLoadingAction, DisableLoadingAction } from '../actions/loading.actions';
 import { Observable } from 'rxjs';
-import { ProjectActionTypes } from '../actions/project.actions';
 import { map } from 'rxjs/operators';
+import { 
+    createProjectAction,
+    createProjectDetailsAction,
+    fetchProjectsAction,
+    fetchProjectDetailsAction,
+    createProjectDetailsSuccessAction,
+    createProjectDetailsFailureAction,
+    createProjectSuccessAction,
+    createProjectFailureAction,
+    fetchProjectsSuccessAction,
+    fetchProjectsFailureAction,
+    fetchProjectDetailsSuccessAction,
+    fetchProjectDetailsFailureAction
+} from '../actions/project.actions';
 
 @Injectable()
 export class LoadingEffects {
@@ -15,9 +28,11 @@ export class LoadingEffects {
     @Effect()
     enableLoading: Observable<Action> = this._actions.pipe(
         ofType(
-            ProjectActionTypes.CREATE_PROJECT,
-            ProjectActionTypes.CREATE_PROJECT_DETAILS,
-            ProjectActionTypes.FETCH_PROJECTS
+            createProjectAction.type,
+            createProjectDetailsAction.type,
+
+            fetchProjectsAction.type,
+            fetchProjectDetailsAction.type
         ),
         map((action) => new EnableLoadingAction())
     );
@@ -25,12 +40,17 @@ export class LoadingEffects {
     @Effect()
     disableLoading: Observable<Action> = this._actions.pipe(
         ofType(
-            ProjectActionTypes.CREATE_PROJECT_DETAILS_SUCCESS,
-            ProjectActionTypes.CREATE_PROJECT_DETAILS_FAILURE,
-            ProjectActionTypes.CREATE_PROJECT_SUCCESS,
-            ProjectActionTypes.CREATE_PROJECT_FAILURE,
-            ProjectActionTypes.FETCH_PROJECTS_SUCCESS,
-            ProjectActionTypes.FETCH_PROJECTS_FAILURE
+            createProjectDetailsSuccessAction.type,
+            createProjectDetailsFailureAction.type,
+
+            createProjectSuccessAction.type,
+            createProjectFailureAction.type,
+
+            fetchProjectsSuccessAction.type,
+            fetchProjectsFailureAction.type,
+
+            fetchProjectDetailsSuccessAction.type,
+            fetchProjectDetailsFailureAction.type
         ),
         map((action) => new DisableLoadingAction())
     )

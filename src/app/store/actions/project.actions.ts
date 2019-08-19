@@ -1,89 +1,21 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 import { Project } from 'src/app/models/project.model';
 import { ProjectDetailInput } from 'src/app/models/input/project-detail-input.model';
 import { ProjectInput } from 'src/app/models/input/project-input.model';
 import { ProjectDetail } from 'src/app/models/project-detail.model';
 
-export enum ProjectActionTypes {
-    CREATE_PROJECT = 'CREATE_PROJECT',
-    CREATE_PROJECT_SUCCESS = 'CREATE_PROJECT_SUCCESS',
-    CREATE_PROJECT_FAILURE = 'CREATE_PROJECT_FAILURE',
+export const createProjectDetailsAction = createAction('CREATE_PROJECT_DETAILS', props<{ projectId: number, projectDetail: ProjectDetailInput }>())
+export const createProjectDetailsSuccessAction = createAction('CREATE_PROJECT_DETAILS_SUCCESS', props<{ payload: ProjectDetail }>())
+export const createProjectDetailsFailureAction = createAction('CREATE_PROJECT_DETAILS_FAILURE', props<{ payload: any }>())
 
-    CREATE_PROJECT_DETAILS = 'CREATE_PROJECT_DETAILS',
-    CREATE_PROJECT_DETAILS_SUCCESS = 'CREATE_PROJECT_DETAILS_SUCCESS',
-    CREATE_PROJECT_DETAILS_FAILURE = 'CREATE_PROJECT_DETAILS_FAILURE',
+export const fetchProjectDetailsAction = createAction('FETCH_PROJECT_DETAILS', props<{ projectId: number }>())
+export const fetchProjectDetailsSuccessAction = createAction('FETCH_PROJECT_DETAILS_SUCCESS', props<{ payload: ProjectDetail }>())
+export const fetchProjectDetailsFailureAction = createAction('FETCH_PROJECT_DETAILS_Failure', props<{ payload: any }>())
 
-    FETCH_PROJECTS = 'FETCH_PROJECTS',
-    FETCH_PROJECTS_SUCCESS = 'FETCH_PROJECTS_SUCCESS',
-    FETCH_PROJECTS_FAILURE = 'FETCH_PROJECTS_SUCCESS',
-}
+export const createProjectAction = createAction('CREATE_PROJECT', props<ProjectInput>());
+export const createProjectSuccessAction = createAction('CREATE_PROJECT_SUCCESS', props<{ payload: Project }>());
+export const createProjectFailureAction = createAction('CREATE_PROJECT_FAILURE', props<{ payload: any }>());
 
-/* Create Project Actions Start */
-export class CreateProjectAction implements Action {
-    public readonly type = ProjectActionTypes.CREATE_PROJECT;
-
-    constructor(public payload: ProjectInput) { }
-}
-
-export class CreateProjectSuccessAction implements Action {
-    public readonly type = ProjectActionTypes.CREATE_PROJECT_SUCCESS;
-
-    constructor(public payload: Project) { }
-}
-
-export class CreateProjectFailureAction implements Action {
-    public readonly type = ProjectActionTypes.CREATE_PROJECT_FAILURE;
-
-    constructor(public payload: any) { }
-}
-/* Create Project Actions End */
-
-/* Create Project Details Actions Start */
-export class CreateProjectDetailsAction implements Action {
-    public readonly type = ProjectActionTypes.CREATE_PROJECT_DETAILS;
-
-    constructor(public payload: { projectId: number, projectDetail: ProjectDetailInput }) { }
-}
-
-export class CreateProjectDetailsSuccessAction implements Action {
-    public readonly type = ProjectActionTypes.CREATE_PROJECT_DETAILS_SUCCESS;
-
-    constructor(public payload: ProjectDetail) { }
-}
-
-export class CreateProjectDetailsFailureAction implements Action {
-    public readonly type = ProjectActionTypes.CREATE_PROJECT_DETAILS_FAILURE;
-
-    constructor(public payload: any) { }
-}
-/* Create Project Details Actions End */
-
-/* Fetch Projects Actions Start */
-export class FetchProjectsAction implements Action {
-    public readonly type = ProjectActionTypes.FETCH_PROJECTS
-}
-
-export class FetchProjectsSuccessAction implements Action {
-    public readonly type = ProjectActionTypes.FETCH_PROJECTS_SUCCESS;
-
-    constructor(public payload: Project[]) { }
-}
-
-export class FetchProjectsFailureAction implements Action {
-    public readonly type = ProjectActionTypes.FETCH_PROJECTS_FAILURE;
-
-    constructor(public payload: any) { }
-}
-/* Fetch Projects Actions End */
-
-export type ProjectActions =
-    CreateProjectAction |
-    CreateProjectSuccessAction |
-    CreateProjectFailureAction |
-    CreateProjectDetailsAction |
-    CreateProjectDetailsSuccessAction |
-    CreateProjectDetailsFailureAction |
-    FetchProjectsAction |
-    FetchProjectsSuccessAction |
-    FetchProjectsFailureAction;
-    
+export const fetchProjectsAction = createAction('FETCH_PROJECTS');
+export const fetchProjectsSuccessAction = createAction('FETCH_PROJECTS_SUCCESS', props<{ payload: Project[] }>());
+export const fetchProjectsFailureAction = createAction('FETCH_PROJECTS_FAILURE', props<{ payload: any }>());
