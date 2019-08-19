@@ -12,6 +12,10 @@ export enum ProjectActionTypes {
     CREATE_PROJECT_DETAILS = 'CREATE_PROJECT_DETAILS',
     CREATE_PROJECT_DETAILS_SUCCESS = 'CREATE_PROJECT_DETAILS_SUCCESS',
     CREATE_PROJECT_DETAILS_FAILURE = 'CREATE_PROJECT_DETAILS_FAILURE',
+
+    FETCH_PROJECTS = 'FETCH_PROJECTS',
+    FETCH_PROJECTS_SUCCESS = 'FETCH_PROJECTS_SUCCESS',
+    FETCH_PROJECTS_FAILURE = 'FETCH_PROJECTS_SUCCESS',
 }
 
 /* Create Project Actions Start */
@@ -54,10 +58,32 @@ export class CreateProjectDetailsFailureAction implements Action {
 }
 /* Create Project Details Actions End */
 
+/* Fetch Projects Actions Start */
+export class FetchProjectsAction implements Action {
+    public readonly type = ProjectActionTypes.FETCH_PROJECTS
+}
+
+export class FetchProjectsSuccessAction implements Action {
+    public readonly type = ProjectActionTypes.FETCH_PROJECTS_SUCCESS;
+
+    constructor(public payload: Project[]) { }
+}
+
+export class FetchProjectsFailureAction implements Action {
+    public readonly type = ProjectActionTypes.FETCH_PROJECTS_FAILURE;
+
+    constructor(public payload: any) { }
+}
+/* Fetch Projects Actions End */
+
 export type ProjectActions =
     CreateProjectAction |
     CreateProjectSuccessAction |
     CreateProjectFailureAction |
     CreateProjectDetailsAction |
     CreateProjectDetailsSuccessAction |
-    CreateProjectDetailsFailureAction;
+    CreateProjectDetailsFailureAction |
+    FetchProjectsAction |
+    FetchProjectsSuccessAction |
+    FetchProjectsFailureAction;
+    

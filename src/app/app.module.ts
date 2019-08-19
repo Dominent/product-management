@@ -28,6 +28,7 @@ import { loadingReducer } from './store/reducers/loading.reducer';
 import { ProjectEffects } from './store/effects/project.effects';
 import { ProjectService } from './services/project.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AlertService } from './services/alert.service';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { HttpClientModule } from '@angular/common/http';
 
     AuthService,
     AuthGuardService,
+    AlertService,
     ProjectService
   ],
   bootstrap: [AppComponent]

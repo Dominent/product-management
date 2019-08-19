@@ -34,6 +34,25 @@ body {
     }
 }
 
+.alert--success {
+    background: $color-success !important;
+}
+
+.alert--failure {
+    background: $color-failure !important;
+}
+
+.alert--failure,
+.alert--success {
+    text-align: center;
+
+    .mat-simple-snackbar {
+        display: inherit !important;
+        padding: 10px 60px;
+        font-size: 14px;
+    }
+}
+
 @for $i from 1 through 10 {
     .my-#{$i} {
         margin-top: ($i * 10) * 1px !important;

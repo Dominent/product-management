@@ -5,18 +5,25 @@ import { ProjectInput } from '../models/input/project-input.model';
 import { HttpClient } from '@angular/common/http';
 import { ProjectDetailInput } from '../models/input/project-detail-input.model';
 import { ProjectDetail } from '../models/project-detail.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class ProjectService {
+    private readonly url = `${environment.API_URL}/projects`;
+
     constructor(
         private httpClient: HttpClient
     ){}
 
     createProject(project: ProjectInput): Observable<Project> {
-        return of({} as Project)
+        return this.httpClient.post<Project>(this.url, project);
     }
 
     createProjectDetails(projectId: number, projectDetails: ProjectDetailInput): Observable<ProjectDetail> {
         return of({} as ProjectDetail)
+    }
+
+    getProjects(): Observable<Project[]> {
+        return this.httpClient.get<Project[]>(this.url);
     }
 }

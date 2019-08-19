@@ -14,6 +14,7 @@ export class FhUploadComponent {
     @Input() public Name: string;
     @Input() public Label: string;
     @Input() public Limit: number;
+    @Input() public ShowName: boolean = true;
 
     @Output() public Change: EventEmitter<Upload>;
 

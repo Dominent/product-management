@@ -15,6 +15,12 @@ export function projectReducer(state = initialState, action: ProjectActions): Pr
                 projectDetails: [...state.projectDetails, action.payload]
             }
         }
+        case ProjectActionTypes.FETCH_PROJECTS_SUCCESS: {
+            return {
+                ...state,
+                projects: action.payload
+            }
+        }
         default:
             return state;
     }

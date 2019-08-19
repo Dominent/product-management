@@ -16,7 +16,8 @@ export class LoadingEffects {
     enableLoading: Observable<Action> = this._actions.pipe(
         ofType(
             ProjectActionTypes.CREATE_PROJECT,
-            ProjectActionTypes.CREATE_PROJECT_DETAILS
+            ProjectActionTypes.CREATE_PROJECT_DETAILS,
+            ProjectActionTypes.FETCH_PROJECTS
         ),
         map((action) => new EnableLoadingAction())
     );
@@ -27,7 +28,9 @@ export class LoadingEffects {
             ProjectActionTypes.CREATE_PROJECT_DETAILS_SUCCESS,
             ProjectActionTypes.CREATE_PROJECT_DETAILS_FAILURE,
             ProjectActionTypes.CREATE_PROJECT_SUCCESS,
-            ProjectActionTypes.CREATE_PROJECT_FAILURE
+            ProjectActionTypes.CREATE_PROJECT_FAILURE,
+            ProjectActionTypes.FETCH_PROJECTS_SUCCESS,
+            ProjectActionTypes.FETCH_PROJECTS_FAILURE
         ),
         map((action) => new DisableLoadingAction())
     )

@@ -33,6 +33,17 @@
         </div>
 
         <div class="form-control">
+            <fh-upload 
+                [ShowName]="false"
+                (Change)="onProjectImageAdd($event)"
+                Limit="1"
+                Name="upload"
+                Label="Project Cover Image"
+            >
+            </fh-upload>
+        </div>
+
+        <div class="form-control">
             <div class="form-field">
                 <mat-checkbox name="ongoing" formControlName="ongoing">Ongoing</mat-checkbox>
             </div>
