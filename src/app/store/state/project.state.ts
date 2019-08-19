@@ -3,10 +3,10 @@ import { ProjectDetail } from 'src/app/models/project-detail.model';
 
 export interface ProjectState {
     projects: Project[]
-    projectDetails: ProjectDetail[]
+    projectDetails: ProjectDetail
 }
 
 export const initialState: ProjectState = {
     projects: [],
-    projectDetails: []
+    projectDetails: null
 }

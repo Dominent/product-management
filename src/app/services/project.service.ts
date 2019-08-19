@@ -20,10 +20,14 @@ export class ProjectService {
     }
 
     createProjectDetails(projectId: number, projectDetails: ProjectDetailInput): Observable<ProjectDetail> {
-        return of({} as ProjectDetail)
+        return this.httpClient.post<ProjectDetail>(`${this.url}/${projectId}/details`, projectDetails);
     }
 
     getProjects(): Observable<Project[]> {
         return this.httpClient.get<Project[]>(this.url);
+    }
+
+    getProjectDetails(projectId: number): Observable<ProjectDetail> {
+        return this.httpClient.get<ProjectDetail>(`${this.url}/${projectId}/details`);
     }
 }

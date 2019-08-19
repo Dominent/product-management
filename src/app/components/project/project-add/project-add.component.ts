@@ -33,7 +33,11 @@ export class ProjectAddDialogComponent {
     }
 
     submitHandler(project: ProjectInput) {
-        this.store.dispatch(createProjectAction(Object.assign(project, { image: this.image.value })));
+        if (this.image) {
+            project.image = this.image.value;
+        }
+
+        this.store.dispatch(createProjectAction(project));
         this.dialogRef.close();
     }
 

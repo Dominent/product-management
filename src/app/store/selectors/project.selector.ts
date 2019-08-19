@@ -11,5 +11,5 @@ export const selectProjects = createSelector(
 
 export const selectProjectDetails = createSelector(
     projectState,
-    (state: ProjectState, props: { projectId: number }) => state.projectDetails.find(x => x.projectId === props.projectId)
+    (state: ProjectState) => state.projectDetails
 )

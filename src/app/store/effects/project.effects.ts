@@ -6,7 +6,7 @@ import { switchMap, map, catchError } from 'rxjs/operators';
 import { ProjectService } from 'src/app/services/project.service';
 import { AlertService, AlertContext, AlertType } from 'src/app/services/alert.service';
 import { AppState } from '../app.state';
-import { createProjectAction, createProjectSuccessAction, createProjectFailureAction, fetchProjectsAction, fetchProjectsSuccessAction, fetchProjectsFailureAction, createProjectDetailsAction, createProjectDetailsSuccessAction, createProjectDetailsFailureAction } from '../actions/project.actions';
+import { createProjectAction, createProjectSuccessAction, createProjectFailureAction, fetchProjectsAction, fetchProjectsSuccessAction, fetchProjectsFailureAction, createProjectDetailsAction, createProjectDetailsSuccessAction, createProjectDetailsFailureAction, fetchProjectDetailsAction, fetchProjectDetailsSuccessAction, fetchProjectDetailsFailureAction } from '../actions/project.actions';
 
 @Injectable()
 export class ProjectEffects {
@@ -48,6 +48,17 @@ export class ProjectEffects {
         map((res) => createProjectDetailsSuccessAction({payload: res})),
         catchError((err, caught) => {
             this.store.dispatch(createProjectDetailsFailureAction(err));
+            return caught;
+        })
+    )
+
+    @Effect()
+    getProjectDetailsEffect$: Observable<Action> = this.actions$.pipe(
+        ofType<ReturnType<typeof fetchProjectDetailsAction>>(fetchProjectDetailsAction.type),
+        switchMap((props) => this.projectService.getProjectDetails(props.projectId)),
+        map((res) => fetchProjectDetailsSuccessAction({ payload: res })),
+        catchError((err, caught) => {
+            this.store.dispatch(fetchProjectDetailsFailureAction(err));
             return caught;
         })
     )

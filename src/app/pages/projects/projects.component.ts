@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Project } from 'src/app/models/project.model';
 import { MatDialog } from '@angular/material';
 import { ProjectAddDialogComponent } from 'src/app/components/project/project-add/project-add.component';
@@ -20,7 +20,7 @@ export class ProjectsComponent {
     ) { 
         this.store.dispatch(fetchProjectsAction());
     }
-
+    
     projects$ = this.store.pipe(select(selectProjects));
 
     public displayedColumns: string[] = ['id', 'title', 'location', 'startDate', 'endDate', 'ongoing', 'edit', 'delete'];
