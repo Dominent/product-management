@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { Action } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import {
     ProjectActionTypes,
     CreateProjectAction,
@@ -17,13 +17,15 @@ import {
 import { switchMap, map, catchError } from 'rxjs/operators';
 import { ProjectService } from 'src/app/services/project.service';
 import { AlertService, AlertContext, AlertType } from 'src/app/services/alert.service';
+import { AppState } from '../app.state';
 
 @Injectable()
 export class ProjectEffects {
     constructor(
         private actions$: Actions,
         private projectService: ProjectService,
-        private alertService: AlertService
+        private alertService: AlertService,
+        private store: Store<AppState>
     ) { }
 
     @Effect()
@@ -31,7 +33,10 @@ export class ProjectEffects {
         ofType<CreateProjectAction>(ProjectActionTypes.CREATE_PROJECT),
         switchMap((action) => this.projectService.createProject(action.payload)),
         map((res) => new CreateProjectSuccessAction(res)),
-        catchError((err) => of(new CreateProjectFailureAction(err)))
+        catchError((err, caught) => {
+            this.store.dispatch(new CreateProjectFailureAction(err));
+            return caught;
+        })
     )
 
     @Effect()
@@ -39,7 +44,10 @@ export class ProjectEffects {
         ofType<FetchProjectsAction>(ProjectActionTypes.FETCH_PROJECTS),
         switchMap((action) => this.projectService.getProjects()),
         map((res) => new FetchProjectsSuccessAction(res)),
-        catchError((err) => of(new FetchProjectsFailureAction(err)))
+        catchError((err, caught) => {
+            this.store.dispatch(new FetchProjectsFailureAction(err));
+            return caught;
+        })
     )
 
     @Effect()
@@ -49,7 +57,10 @@ export class ProjectEffects {
             action.payload.projectId,
             action.payload.projectDetail)),
         map((res) => new CreateProjectDetailsSuccessAction(res)),
-        catchError((err) => of(new CreateProjectDetailsFailureAction(err)))
+        catchError((err, caught) => {
+            this.store.dispatch(new CreateProjectDetailsFailureAction(err));
+            return caught;
+        })
     )
 
     @Effect({ dispatch: false })
