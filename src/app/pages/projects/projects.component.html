@@ -11,7 +11,7 @@
     <mat-divider></mat-divider>
     <div class="row">
         <div class="col-md-12">
-            <table mat-table [dataSource]="projects" class="project-table">
+            <table mat-table [dataSource]="projects$" class="project-table">
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></tr>
 

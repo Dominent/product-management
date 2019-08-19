@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { AuthService } from './components/auth/auth.service';
 import { Router } from '@angular/router';
 import { AppState } from './store/app.state';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { selectLoading } from './store/selectors/loading.selector';
+import { selectAuthenticated, selectUsername } from './store/selectors/auth.selector';
 
 @Component({
   selector: 'app-root',
@@ -17,13 +18,9 @@ export class AppComponent {
     private store: Store<AppState>
   ) {}
 
-  get username(): Observable<string> {
-    return this.store.select(x => x.auth.user.username)
-  }
-
-  get authenticated(): Observable<boolean> {
-    return this.store.select(x => x.auth.authenticated)
-  }
+  loading$ = this.store.pipe(select(selectLoading))
+  authenticated$ = this.store.pipe(select(selectAuthenticated))
+  username$ = this.store.pipe(select(selectUsername))
 
   logout() {
     this.authService.Logout();

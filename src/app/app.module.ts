@@ -22,6 +22,12 @@ import { authReducer } from 'src/app/store/reducers/auth.reducer';
 import { ProjectDetailsAddDialogComponent } from './components/project/project-details/project-details-add/project-details-add.component';
 import { FhUploadComponent } from './components/input/fh-upload/fh-upload.component';
 import { FhButtonComponent } from './components/input/fh-button/fh-button.component';
+import { LoadingEffects } from './store/effects/loading.effects';
+import { EffectsModule } from '@ngrx/effects';
+import { loadingReducer } from './store/reducers/loading.reducer';
+import { ProjectEffects } from './store/effects/project.effects';
+import { ProjectService } from './services/project.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -40,11 +46,16 @@ import { FhButtonComponent } from './components/input/fh-button/fh-button.compon
   ],
   imports: [
     MaterialModule,
-    FlexLayoutModule,
+    HttpClientModule,
     StoreModule.forRoot({
       project: projectReducer,
-      auth: authReducer
+      auth: authReducer,
+      loading: loadingReducer
     }),
+    EffectsModule.forRoot([
+      LoadingEffects,
+      ProjectEffects
+    ]),
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
@@ -63,7 +74,8 @@ import { FhButtonComponent } from './components/input/fh-button/fh-button.compon
     }, /* dd/MM/yyyy format for datepicker */
 
     AuthService,
-    AuthGuardService
+    AuthGuardService,
+    ProjectService
   ],
   bootstrap: [AppComponent]
 })

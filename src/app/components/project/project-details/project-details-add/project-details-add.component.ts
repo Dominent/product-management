@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { ProjectDetailInput } from 'src/app/models/input/project-detail-input.model';
 import { AppState } from 'src/app/store/app.state';
 import { Store } from '@ngrx/store';
-import { CreateProjectDetailAction } from 'src/app/store/actions/project.actions';
+import { CreateProjectDetailsAction } from 'src/app/store/actions/project.actions';
 
 @Component({
     templateUrl: 'project-details-add.component.html',
@@ -22,7 +22,7 @@ export class ProjectDetailsAddDialogComponent {
     ) { }
 
     submitHandler() {
-        this.store.dispatch(new CreateProjectDetailAction({
+        this.store.dispatch(new CreateProjectDetailsAction({
             projectId: this.data.projectId,
             projectDetail: this.projectDetail
         }))
